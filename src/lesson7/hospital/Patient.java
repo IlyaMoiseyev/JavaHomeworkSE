@@ -1,12 +1,14 @@
 package lesson7.hospital;
 
+import java.util.Random;
+
 public class Patient {
   private String name;
   private int age;
   private int diseaseNumber;
 
   public Patient() {
-    this("Санек", 86, 1);
+    this("Санек", 86, new Random().nextInt(1,3));
   }
 
   public Patient(String name, int age, int diseaseNumber) {

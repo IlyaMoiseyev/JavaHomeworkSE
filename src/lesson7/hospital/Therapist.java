@@ -15,14 +15,16 @@ public class Therapist extends Doctor {
 
   @Override
   public void treatPatient() {
-    System.out.println("Провожу осмотр, определяю код заболевания...");
+    System.out.println("Сынок, я вылечу тебя сам, пара уаров палкой и ты здоров!");
   }
 
   public int getAdvise(Patient patient) {
+    System.out.println("Провожу осмотр, определяю код заболевания...");
     int disease = patient.getDiseaseNumber();
     switch (disease) {
       case 1 -> System.out.println("Направляю " + patient.getName() + " к хирургу!");
       case 2 -> System.out.println("Направляю " + patient.getName() + " к дантисту!");
+      case 3 -> treatPatient();
     }
     return disease;
   }

@@ -16,7 +16,6 @@ public class Hospital {
     System.out.println("Поступил пациент! Данные пациента:");
     patient.showAllPatientInformation();
     therapist.getAllInformationAboutDoctor();
-    therapist.treatPatient();
     processingTherapistDecision(patient);
   }
 
@@ -26,7 +25,7 @@ public class Hospital {
       surgeon.getAllInformationAboutDoctor();
       surgeon.treatPatient();
       surgeon.getAdvise(patient);
-    } else {
+    } else if (numberOfDisease == 2) {
       dentist.getAllInformationAboutDoctor();
       dentist.treatPatient();
       dentist.getAdvise(patient);
