@@ -152,63 +152,34 @@ public class ATM {
   }
 
   public boolean cashWithdrawal(int amount) {
+    System.out.println("------------------------------------");
     System.out.println("Попытка снять " + amount + " $");
+
     boolean success = false;
-    int tempWithdrawal = amount;
-    if (tempWithdrawal < getEntireAmountATM()) {
-      int counterOfTwenty = 0;
-      int counterOfFifty = 0;
-      int counterOfHundred = 0;
 
-      int tempHundreds = tempWithdrawal / 100;
-      if (tempHundreds > 0 && tempHundreds > getQuantityHundredDollarBills() && getQuantityHundredDollarBills() > 0) {
-        tempHundreds -= getQuantityHundredDollarBills();
-        tempWithdrawal -= quantityHundredDollarBills * 100;
-        counterOfHundred = quantityHundredDollarBills;
-        quantityHundredDollarBills = 0;
-      } else {
-        tempWithdrawal -= tempHundreds * 100;
-        counterOfHundred = tempHundreds;
-        quantityHundredDollarBills -= tempHundreds;
-      }
+    for (int i = 0; i <= quantityHundredDollarBills; i++) {
+      for (int j = 0; j <= quantityFiftyDollarBills; j++) {
+        for (int k = 0; k <= quantityTwentyDollarBills; k++) {
+          int tempAdditionResult = i * 100 + j * 50 + k * 20;
+          if (tempAdditionResult == amount) {
+            quantityHundredDollarBills -= i;
+            quantityFiftyDollarBills -= j;
+            quantityTwentyDollarBills -= k;
 
-      int tempFifty = tempWithdrawal / 50;
-      if (tempFifty > 0 && tempFifty > getQuantityFiftyDollarBills() && getQuantityHundredDollarBills() > 0) {
-        tempFifty -= getQuantityFiftyDollarBills();
-        tempWithdrawal -= tempFifty * 50;
-        counterOfFifty = quantityFiftyDollarBills;
-        quantityFiftyDollarBills = 0;
-      } else {
-        tempWithdrawal -= tempFifty * 50;
-        counterOfFifty = tempFifty;
-        quantityFiftyDollarBills -= tempFifty;
-      }
-
-      if (tempWithdrawal > 0) {
-        int tempTwenty = tempWithdrawal / 20;
-        if (tempTwenty <= getQuantityTwentyDollarBills()) {
-          tempWithdrawal -= tempTwenty * 20;
-          counterOfTwenty = tempTwenty;
-          quantityTwentyDollarBills -= tempTwenty;
-        } else {
-          System.out.println("Не хватает банкнот для снятия!");
+            System.out.println("Операция выполнена успешно!");
+            System.out.println("Выдано: ");
+            if (i > 0) System.out.println("Банкнот номиналом 100$ - " + i + " ед.");
+            if (j > 0) System.out.println("Банкнот номиналом 50$ - " + j + " ед.");
+            if (k > 0) System.out.println("Банкнот номиналом 20$ - " + k + " ед.");
+            System.out.println("------------------------------------");
+            success = true;
+            return success;
+          }
         }
       }
-
-      if (tempWithdrawal == 0) {
-        System.out.println("Успех операции!");
-        System.out.println("Выдана сумма: " + amount + ". Подробно:");
-        System.out.println("Банкнот номиналом 20$: " + counterOfTwenty + " ед.");
-        System.out.println("Банкнот номиналом 50$: " + counterOfFifty + " ед.");
-        System.out.println("Банкнот номиналом 100$: " + counterOfHundred + " ед.");
-        return !success;
-      } else {
-        System.out.println("Средства которые не удалось снять " + tempWithdrawal);
-        return success;
-      }
-    } else {
-      System.out.println("В банкомате отсутствует необходимое количество банкнот!");
-      return success;
     }
+
+    System.out.println("Невозможно выполнить операцию с имеющимся в банкомате набором банкнот!");
+    return success;
   }
 }

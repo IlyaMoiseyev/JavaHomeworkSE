@@ -6,7 +6,7 @@ public class Main {
     atm.showAmountAtATM();
     atm.depositCashToATM(90);
     atm.showAmountAtATM();
-    atm.cashWithdrawal(370);
+    atm.cashWithdrawal(360);
     atm.showAmountAtATM();
   }
 }
