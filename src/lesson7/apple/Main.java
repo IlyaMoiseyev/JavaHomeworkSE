@@ -1,4 +1,5 @@
 package lesson7.apple;
+import java.lang.reflect.Field;
 
 /*  Задача №2*:
     Создать класс Apple и добавить в него поле color с модификатором доступа private и
@@ -7,10 +8,17 @@ package lesson7.apple;
 
 public class Main {
   public static void main(String[] args) {
-    Apple firstApple = new Apple();
-    System.out.println("Значение приватного, инициализированного поля colour: " + firstApple.getColour());
+    Apple apple = new Apple();
+    System.out.println("Значение приватного, инициализированного поля colour: " + apple.getColour());
 
-    Apple secondApple = new Apple("Green");
-    System.out.println("Значение приватного, измененного поля colour: " + secondApple.getColour());
+    try {
+      Field field = Apple.class.getDeclaredField("colour");
+      field.setAccessible(true);
+      field.set(apple, "Yellow");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    System.out.println("Значение приватного, инициализированного поля colour после изменения: " + apple.getColour());
   }
 }
